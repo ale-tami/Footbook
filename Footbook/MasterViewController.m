@@ -22,15 +22,15 @@
 {
     [super viewDidLoad];
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"People"];
-    
-     request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Footbook"];
-
-    if (![self.fetchedResultsController fetchedObjects]) {
-        [self performSegueWithIdentifier:@"ToFeetPeople" sender:self];
-    }
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"People"];
+//    
+//     request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+//    
+//    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Footbook"];
+//
+//    if (![self.fetchedResultsController fetchedObjects]) {
+//        [self performSegueWithIdentifier:@"ToFeetPeople" sender:self];
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

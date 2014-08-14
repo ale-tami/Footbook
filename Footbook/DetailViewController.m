@@ -13,6 +13,16 @@
 #import "PeopleTableViewCell.h"
 #import "AppDelegate.h"
 
+/*
+ 
+ It wont save on db, error keeps returning nil, and managedObjectContext returns yes, meaning save succesful
+ Code is ok, objects exist, and are not duplicated, since it creates a new one every time a row is selected
+ sqlite file is created, no eerors nor exceptions are thown... may Jobs have marcy on my soul
+ 
+ please dont mind the duplicated and incomplete :D
+ 
+ */
+
 
 @interface DetailViewController ()<JSONManagerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -54,26 +64,26 @@
     ((PeopleTableViewCell*)[tableView cellForRowAtIndexPath:indexPath]).peopleProperty = people;
     NSError *error = nil;
     
-//    BOOL blah = [self.managedObjectContext save:&error];
+    BOOL blah = [self.managedObjectContext save:&error];
     
-//    NSLog(@"error %@",error );
-//    NSLog(blah ? @"Yes" : @"No");
-//    
-//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"People"];
-//    
-//    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-//    
-//    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Footbook"];
-//    
-//    NSLog(@"OBJECTS %@", [self.fetchedResultsController fetchedObjects]);
+    NSLog(@"error %@",error );
+    NSLog(blah ? @"Yes" : @"No");
     
-    NSLog(@"11499 moc %@ has %d insertedObjects",
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"People"];
+    
+    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Footbook"];
+    
+    NSLog(@"OBJECTS %@", [self.fetchedResultsController fetchedObjects]);
+    
+    NSLog(@"moc %@ has %d insertedObjects",
           self.managedObjectContext,
           [[[self managedObjectContext] insertedObjects] count]) ;
-    NSLog(@"11876 Before saving, &error = %@", error) ;
+    NSLog(@"Before saving, &error = %@", error) ;
     BOOL savedOK = [[self managedObjectContext] save:&error] ;
-    NSLog(@"11935 savedOK = %d", savedOK) ;
-    NSLog(@"12500 NSError saving = %@", error) ;
+    NSLog(@"savedOK = %d", savedOK) ;
+    NSLog(@"NSError saving = %@", error) ;
     
 }
 
